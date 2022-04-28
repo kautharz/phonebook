@@ -12,29 +12,25 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     $id = $_POST["id"];
     
     // Validate name
-    $input_name = trim($_POST["Name"]);
+    $input_name = trim($_POST["name"]);
     if(empty($input_name)){
         $name_err = "Please enter a name.";
-    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Please enter a valid name.";
     } else{
         $name = $input_name;
     }
     
     // Validate mobile
-    $input_mobile = trim($_POST["Mobile"]);
-    if(empty($input_address)){
+    $input_mobile = trim($_POST["mobile"]);
+    if(empty($input_mobile)){
         $mobile_err = "Please enter mobile number.";     
     } else{
         $mobile = $input_mobile;
     }
     
     // Validate email
-    $input_email = trim($_POST["Email"]);
+    $input_email = trim($_POST["email"]);
     if(empty($input_email)){
         $email_err = "Please enter email address";     
-    } elseif(!ctype_digit($input_email)){
-        $email_err = "Please enter email address again";
     } else{
         $email = $input_email;
     }
@@ -42,7 +38,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($mobile_err) && empty($email_err)){
         // Prepare an update statement
-        $sql = "UPDATE phonebook SET Name=?, Mobile=?, Email=? WHERE ID=?";
+        $sql = "UPDATE phonebook SET name=?, mobile=?, email=? WHERE ID=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -95,9 +91,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     
                     // Retrieve individual field value
-                    $name = $row["Name"];
-                    $address = $row["Mobile"];
-                    $salary = $row["Email"];
+                    $name = $row["name"];
+                    $address = $row["mobile"];
+                    $salary = $row["email"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
                     header("location: error.php");
@@ -145,17 +141,17 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="Name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
+                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Mobile</label>
-                            <input name="Mobile" class="form-control <?php echo (!empty($mobile_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
+                            <input name="mobile" class="form-control <?php echo (!empty($mobile_err)) ? 'is-invalid' : ''; ?>"><?php echo $mobile; ?></textarea>
                             <span class="invalid-feedback"><?php echo $mobile_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="Email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                            <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
                             <span class="invalid-feedback"><?php echo $email_err;?></span>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>

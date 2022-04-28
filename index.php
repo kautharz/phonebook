@@ -58,10 +58,9 @@
                                         echo "<td>" . $row['mobile'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="read.php?id='. $row['ID'] .'" class="mr-3" title="View Record" > '.file_get_contents("icon.svg").' </a>';
-                                            echo '<a href="read.php?id='. $row['ID'] .'" class="mr-3" title="View Record" data-toggle="tooltip"></a>';
-                                            echo '<a href="update.php?id='. $row['ID'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"></a>';
-                                            echo '<a href="delete.php?id='. $row['ID'] .'" title="Delete Record" data-toggle="tooltip"></a>';
+                                            echo '<a href="read.php?id='. $row['ID'] .'" class="mr-3" title="View Record" > '.file_get_contents("view.svg").' </a>';
+                                            echo '<a href="update.php?id='. $row['ID'] .'" class="mr-3" title="Update Record"> '.file_get_contents("update.svg").' </a>';
+                                            echo '<a href="delete.php?id='. $row['ID'] .'" title="Delete Record" > '.file_get_contents("delete.svg").' </a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
